@@ -22,14 +22,16 @@ var url = require('url');
 // app.use('/img', proxy(url.parse('../WS/img')));
 app.use('/images', proxy(url.parse('http://z2/projs/kisla/X-react-starter/dev/WS/images')));
 
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
 	res.sendFile(path.join(__dirname, 'static', 'index.html'));
 });
 
-app.listen(3000, '0.0.0.0', function(err) {
+var server = app.listen(8000, '127.0.0.1', function (err) {
 	if (err) {
 		console.log(err);
 		return;
 	}
-	console.log('Listening at http://0.0.0.0:3000');
+	var host = server.address().address
+	var port = server.address().port
+	console.log('Listening at http://%s:%s', host, port);
 });
