@@ -6,6 +6,7 @@ import TweenMax from 'gsap'
 
 import rand_arr_elem from '../../helpers/rand_arr_elem'
 import rand_to_fro from '../../helpers/rand_to_fro'
+import AI from '../../helpers/AI'
 
 export default class GameMain extends Component {
 
@@ -201,7 +202,11 @@ export default class GameMain extends Component {
 			!cell_vals['c'+i] && empty_cells_arr.push('c'+i)
 		// console.log(cell_vals, empty_cells_arr, rand_arr_elem(empty_cells_arr))
 
-		const c = rand_arr_elem(empty_cells_arr)
+		// const c = rand_arr_elem(empty_cells_arr)
+
+		let ai = new AI(cell_vals);
+		const c = ai.bestNextMove()
+	
 		cell_vals[c] = 'o'
 
 		TweenMax.from(this.refs[c], 0.7, {opacity: 0, scaleX:0, scaleY:0, ease: Power4.easeOut})
